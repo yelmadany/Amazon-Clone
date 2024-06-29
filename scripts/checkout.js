@@ -1,7 +1,7 @@
 //Import Data, here we are using the cart data
 import * as ProductLibrary from "../data/products.js";
 import * as CartLibrary from "../data/cart.js";
-import * as Utils from "./utils/money.js");
+import * as Utils from "./utils/money.js";
 
 const myCart = CartLibrary.cart;
 const checkoutPage = document.querySelector('.order-summary');
@@ -92,7 +92,7 @@ function loadCheckout() {
   });
   const preTaxPrice = itemPrices + shippingPrice;
   const taxPrice = itemPrices * (tax / 100);
-  const postTaxtPrice = Utils.convertToDollars(preTaxPrice + taxPrice);
+  const postTaxtPrice = Utils.convertToDollars((preTaxPrice + taxPrice));
 
   //Generate the price information HTML:
 
