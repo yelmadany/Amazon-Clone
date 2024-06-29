@@ -1,10 +1,11 @@
+//import modules
+import * as CartLibrary from '../data/cart.js';
+import { products } from '../data/products.js';
 //Step 1 Data : done in Products.js
 
 //Step 2 Generate the HTML
 const ProductPage = document.querySelector('.products-grid');
-
 let productsHTML = ""
-
 products.forEach((product) => {
   productsHTML += `
     <div class="product-container">
@@ -67,31 +68,7 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
   button.addEventListener('click', () => {
 
     const product = { id: button.dataset.productId, name: button.dataset.productName };
-    let cartItem;
-
-    for (let i = 0; i < cart.length; i++) {
-      if (cart[i].productID === product.id) {
-        cartItem = cart[i];
-        break;
-      }
-    }
-    //const cartItem = cart.filter((item) => product.id === item.productID);
-    console.log(cartItem);
-    //if (!cartItem.length) {
-    if (!cartItem) {
-      cart.push(
-        {
-          productID: product.id,
-          productName: product.name,
-          quantity: 1
-        }
-      );
-    }
-    else {
-      cartItem.quantity++;
-    }
-
-    document.querySelector(".cart-quantity").innerHTML = cart.length;
-
+    CartLibrary.addToCart(product);
+    CartLibrary.updateCartQuantity();
   });
 });
