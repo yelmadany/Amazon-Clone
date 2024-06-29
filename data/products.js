@@ -658,3 +658,14 @@ export const products = [
     ]
   }
 ];
+
+
+export function findItemInProducts(id) {
+  let i = 0;
+  for (i; i < products.length; i++) if (products[i].id === id) break;
+
+  if (i === products.length) {
+    return "";
+  }
+  return products[i];
+}

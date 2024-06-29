@@ -1,10 +1,9 @@
-//import modules
+//import modules and Step 1 save the data 
 import * as CartLibrary from '../data/cart.js';
 import { products } from '../data/products.js';
-//Step 1 Data : done in Products.js
 
 //Step 2 Generate the HTML
-const ProductPage = document.querySelector('.products-grid');
+const productPage = document.querySelector('.products-grid');
 let productsHTML = ""
 products.forEach((product) => {
   productsHTML += `
@@ -51,7 +50,7 @@ products.forEach((product) => {
     </div>
 
     <button class="add-to-cart-button button-primary js-add-to-cart" 
-    data-product-id = "${product.id}" data-product-name = "${product.name}">
+    data-product-id = "${product.id}">
       Add to Cart
     </button>
     </div>
@@ -59,15 +58,13 @@ products.forEach((product) => {
 });
 
 //STep 3, load it onto the page
-
-ProductPage.innerHTML = productsHTML;
-
+productPage.innerHTML = productsHTML;
 
 //Cart feature
 document.querySelectorAll(".js-add-to-cart").forEach((button) => {
   button.addEventListener('click', () => {
 
-    const product = { id: button.dataset.productId, name: button.dataset.productName };
+    const product = { id: button.dataset.productId };
     CartLibrary.addToCart(product);
     CartLibrary.updateCartQuantity();
   });
