@@ -5,6 +5,7 @@ import * as CartLibrary from "../data/cart.js";
 const myCart = CartLibrary.cart;
 const checkoutPage = document.querySelector('.order-summary');
 
+
 //intitalizing the price information 
 let itemPrices = 0;
 let shippingPrice = 0;
@@ -48,7 +49,7 @@ myCart.forEach((item) => {
               Choose a delivery option:
             </div>
             <div class="delivery-option">
-              <input type="radio" checked class="delivery-option-input" name="delivery-option-1">
+              <input type="radio" checked class="delivery-option-input" name="delivery-option-${product.id}">
               <div>
                 <div class="delivery-option-date">
                   Tuesday, June 21
@@ -59,7 +60,7 @@ myCart.forEach((item) => {
               </div>
             </div>
             <div class="delivery-option">
-              <input type="radio" class="delivery-option-input" name="delivery-option-1">
+              <input type="radio" class="delivery-option-input" name="delivery-option-${product.id}">
               <div>
                 <div class="delivery-option-date">
                   Wednesday, June 15
@@ -70,7 +71,7 @@ myCart.forEach((item) => {
               </div>
             </div>
             <div class="delivery-option">
-              <input type="radio" class="delivery-option-input" name="delivery-option-1">
+              <input type="radio" class="delivery-option-input" name="delivery-option-${product.id}">
               <div>
                 <div class="delivery-option-date">
                   Monday, June 13
