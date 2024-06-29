@@ -1,6 +1,7 @@
 //import modules and Step 1 save the data 
 import * as CartLibrary from '../data/cart.js';
 import { products } from '../data/products.js';
+import * as Utils from './utils/money.js'
 
 //Step 2 Generate the HTML
 const productPage = document.querySelector('.products-grid');
@@ -24,7 +25,7 @@ products.forEach((product) => {
     </div>
 
     <div class="product-price">
-      $${(product.priceCents / 100).toFixed(2)}
+      $${Utils.convertToDollars(product.priceCents)}
     </div>
 
     <div class="product-quantity-container">

@@ -10,7 +10,7 @@ export const cart = [
   }
 ];
 
-export let cartquantity = 0;
+export let cartquantity = 4;
 
 export function addToCart(product) {
   let i = 0;
@@ -33,4 +33,16 @@ export function addToCart(product) {
 export function updateCartQuantity() {
   cartquantity++;
   document.querySelector(".cart-quantity").innerHTML = cartquantity;
+}
+
+export function deleteItemFromCart(id) {
+  const index = cart.findIndex(item => item.productID === id);
+  if (cart[index].quantity === 1) {
+    cart.splice(index, 1);
+  }
+  else {
+    cart[index].quantity--;
+  }
+
+  cartquantity--;
 }
