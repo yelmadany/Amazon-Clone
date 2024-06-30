@@ -209,3 +209,36 @@
   margin-top: 11px;
   margin-bottom: 15px;
 }
+
+
+/*Testing*/
+.test {
+  display: inline-block;
+  position: relative;
+}
+
+.new-update-button {
+  display: inline-block;
+  margin: 100px;
+  border: none;
+  background-color: brown;
+  border-radius: 7px;
+  padding: 4px 8px;
+}
+
+.update-value-button {
+  display: none;
+  position: absolute;
+  background-color: red;
+}
+
+.value-button {
+  display: none;
+  background-color: red;
+
+}
+
+.value-button .new-update-button:hover {
+  display: block;
+  background-color: black;
+}
