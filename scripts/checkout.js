@@ -5,6 +5,7 @@ import * as Utils from "./utils/money.js";
 
 const myCart = CartLibrary.cart;
 const checkoutPage = document.querySelector('.order-summary');
+const checkoutHeader = document.querySelector('.return-to-home-link');
 loadCheckout();
 
 function loadCheckout() {
@@ -88,7 +89,7 @@ function loadCheckout() {
     </div>
     </div>`;
     //Calculations for price portion of the application
-    itemPrices += product.priceCents;
+    itemPrices += (product.priceCents * item.quantity);
   });
   const preTaxPrice = itemPrices + shippingPrice;
   const taxPrice = itemPrices * (tax / 100);
@@ -134,11 +135,13 @@ function loadCheckout() {
 
   //load to the webpage
   checkoutPage.innerHTML = cartHTML;
+  checkoutHeader.innerText = CartLibrary.cartquantity + " items" //update the headers
 
+
+  //Deleting items from cart button functionality
   document.querySelectorAll(".delete-quantity-link").forEach((deleteButton) => {
     deleteButton.addEventListener('click', () => {
       const productId = deleteButton.dataset.productId;
-
       CartLibrary.deleteItemFromCart(productId);
       loadCheckout();
     })
