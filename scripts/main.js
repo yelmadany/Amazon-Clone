@@ -61,6 +61,9 @@ products.forEach((product) => {
 //STep 3, load it onto the page
 productPage.innerHTML = productsHTML;
 
+//Load the cart 
+document.querySelector('.cart-quantity').innerText = CartLibrary.cartquantity;
+
 //Cart feature
 document.querySelectorAll(".js-add-to-cart").forEach((button) => {
   button.addEventListener('click', () => {

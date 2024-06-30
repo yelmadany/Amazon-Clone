@@ -138,9 +138,20 @@ function loadCheckout() {
   document.querySelectorAll(".delete-quantity-link").forEach((deleteButton) => {
     deleteButton.addEventListener('click', () => {
       const productId = deleteButton.dataset.productId;
-      //alert("ok");
+
       CartLibrary.deleteItemFromCart(productId);
       loadCheckout();
     })
   });
+  /*
+
+  document.querySelectorAll(".update-quantity-link").forEach((updateButton) => {
+    updateButton.addEventListener('click', () => {
+      const productId = updateButton.dataset.productId;
+
+      CartLibrary.deleteItemFromCart(productId);
+      loadCheckout(); //change it so that u only update the specific thingy mingy
+    })
+  });
+  */
 }
