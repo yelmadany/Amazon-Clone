@@ -2,11 +2,17 @@
 import * as ProductLibrary from "../data/products.js";
 import * as CartLibrary from "../data/cart.js";
 import * as Utils from "./utils/money.js";
+import * as Date from "./utils/date.js";
+import * as DeliveryLibrary from "../data/deliveryOptions.js";
+
+
 
 const myCart = CartLibrary.cart;
-const checkoutPage = document.querySelector('.order-summary');
+const myOptions = DeliveryLibrary.DeliveryOptions;
+const checkoutSummary = document.querySelector('.order-summary');
 const checkoutHeader = document.querySelector('.return-to-home-link');
-loadCheckout();
+const checkoutPayment = document.querySelector('.payment-summary');
+//const checkoutDeliveryOption = document.querySelector('.js-delivery');
 
 function loadCheckout() {
 
@@ -18,11 +24,15 @@ function loadCheckout() {
   //Generating the html for the individual cart items
   let cartHTML = '';
   myCart.forEach((item) => {
-    const product = ProductLibrary.findItemInProducts(item.productID);
+    const product = ProductLibrary.findItemInProducts(item.productID);//get product
+
+    const deliveryOption = DeliveryLibrary.findItemInDeliveryOptions(item.deliveryOption);//get the delivery option chosen
+
+    //add cart item
     cartHTML += `
     <div class="cart-item-container">
     <div class="delivery-date">
-    Delivery date: Tuesday, June 21
+    Delivery date: ${Date.getDeliveryDate(deliveryOption)}
     </div>
     
     <div class="cart-item-details-grid">
@@ -47,57 +57,43 @@ function loadCheckout() {
     </span>
     </div>
     </div>
-    
+
     <div class="delivery-options">
     <div class="delivery-options-title">
     Choose a delivery option:
-    </div>
-    <div class="delivery-option">
-    <input type="radio" checked class="delivery-option-input" name="delivery-option-${product.id}">
-    <div>
-    <div class="delivery-option-date">
-    Tuesday, June 21
-    </div>
-    <div class="delivery-option-price">
-    FREE Shipping
-    </div>
-    </div>
-    </div>
-    <div class="delivery-option">
-    <input type="radio" class="delivery-option-input" name="delivery-option-${product.id}">
-    <div>
-    <div class="delivery-option-date">
-    Wednesday, June 15
-    </div>
-    <div class="delivery-option-price">
-    $4.99 - Shipping
-    </div>
-    </div>
-    </div>
-    <div class="delivery-option">
-    <input type="radio" class="delivery-option-input" name="delivery-option-${product.id}">
-    <div>
-    <div class="delivery-option-date">
-    Monday, June 13
-    </div>
-    <div class="delivery-option-price">
-    $9.99 - Shipping
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
     </div>`;
+
+
+    myOptions.forEach((option) => {
+      //add each DeliveryOption
+      cartHTML += `
+      <div class="delivery-option">
+      <input type="radio" ${option.id === deliveryOption.id ? "checked" : ""} class="delivery-option-input" name="delivery-option-${product.id}" data-cart-id = "${item.productID}" data-option-id = "${option.id}">
+      <div>
+      <div class="delivery-option-date">
+      ${Date.getDeliveryDate(option)}
+      </div>
+      <div class="delivery-option-price">
+      ${option.name}
+      </div>
+      </div>
+      </div>`;
+    });
+
+    cartHTML += `</div></div></div>`; //bug fix
     //Calculations for price portion of the application
     itemPrices += (product.priceCents * item.quantity);
   });
+  checkoutSummary.innerHTML = cartHTML;
+  //-----------------------------------
+
+  //Calculating money
   const preTaxPrice = itemPrices + shippingPrice;
   const taxPrice = itemPrices * (tax / 100);
   const postTaxtPrice = Utils.convertToDollars((preTaxPrice + taxPrice));
 
   //Generate the price information HTML:
-
-  cartHTML += `      
+  cartHTML = `      
   <div class="payment-summary">
   <div class="payment-summary-title">
   Order Summary
@@ -132,17 +128,25 @@ function loadCheckout() {
         Place your order
         </button>
         </div>`;
+  checkoutPayment.innerHTML = cartHTML;  //Load
+  //--------------------------------
 
-  //load to the webpage
-  checkoutPage.innerHTML = cartHTML;
-  checkoutHeader.innerText = CartLibrary.cartquantity + " items" //update the headers
-
+  //update the headers
+  checkoutHeader.innerText = CartLibrary.cartquantity + " items"
 
   //Deleting items from cart button functionality
   document.querySelectorAll(".delete-quantity-link").forEach((deleteButton) => {
     deleteButton.addEventListener('click', () => {
       const productId = deleteButton.dataset.productId;
       CartLibrary.deleteItemFromCart(productId);
+      loadCheckout();
+    })
+  });
+
+  document.querySelectorAll('.delivery-option-input').forEach((optionbutton) => {
+    optionbutton.addEventListener('click', () => {
+      const { cartId, optionId } = optionbutton.dataset;
+      CartLibrary.setDeliveryOption(cartId, optionId);
       loadCheckout();
     })
   });
@@ -158,3 +162,6 @@ function loadCheckout() {
   });
   */
 }
+
+
+loadCheckout();
