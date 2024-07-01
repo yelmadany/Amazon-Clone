@@ -102,7 +102,7 @@ function loadCheckout() {
   
   <div class="payment-summary-row">
   <div>Items (${CartLibrary.cartquantity}):</div>
-  <div class="payment-summary-money">${Utils.convertToDollars(itemPrices)}</div>
+  <div class="payment-summary-money">$${Utils.convertToDollars(itemPrices)}</div>
   </div>
   
   <div class="payment-summary-row">
@@ -135,6 +135,8 @@ function loadCheckout() {
   //update the headers
   checkoutHeader.innerText = CartLibrary.cartquantity + " items"
 
+
+
   //Deleting items from cart button functionality
   document.querySelectorAll(".delete-quantity-link").forEach((deleteButton) => {
     deleteButton.addEventListener('click', () => {
@@ -144,6 +146,7 @@ function loadCheckout() {
     })
   });
 
+  //Allowing for delivery option manipulation
   document.querySelectorAll('.delivery-option-input').forEach((optionbutton) => {
     optionbutton.addEventListener('click', () => {
       const { cartId, optionId } = optionbutton.dataset;
