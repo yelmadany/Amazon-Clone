@@ -83,14 +83,15 @@ function loadCheckout() {
     cartHTML += `</div></div></div>`; //bug fix
     //Calculations for price portion of the application
     itemPrices += (product.priceCents * item.quantity);
+    shippingPrice += deliveryOption.priceCents;
   });
   checkoutSummary.innerHTML = cartHTML;
   //-----------------------------------
 
   //Calculating money
   const preTaxPrice = itemPrices + shippingPrice;
-  const taxPrice = itemPrices * (tax / 100);
-  const postTaxtPrice = Utils.convertToDollars((preTaxPrice + taxPrice));
+  const taxPrice = preTaxPrice * (tax / 100);
+  const postTaxtPrice = Utils.convertToDollars(preTaxPrice + taxPrice);
 
   //Generate the price information HTML:
   cartHTML = `      
