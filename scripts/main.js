@@ -69,7 +69,7 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
   button.addEventListener('click', () => {
 
     const product = { id: button.dataset.productId };
-    CartLibrary.addToCart(product);
+    CartLibrary.addToCart(product.id);
     CartLibrary.updateCartQuantity();
   });
 });

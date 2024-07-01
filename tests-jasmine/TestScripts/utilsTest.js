@@ -2,7 +2,7 @@ import * as money from '../../scripts/utils/money.js';
 import * as date from '../../scripts/utils/date.js';
 
 describe('1 . Money Related Utilities Testing', () => {
-  describe('Converting Dollars to Cents', () => {
+  describe('* Converting Dollars to Cents', () => {
 
     //Test
     it('works with the base case of 20.95', () => {
