@@ -1,4 +1,4 @@
-export let products = [
+/*export let products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
@@ -657,8 +657,9 @@ export let products = [
       "mens"
     ]
   }
-];
+];*/
 
+import * as Ok from '../scripts/main.js';
 
 //Converting to class
 class Product {
@@ -699,13 +700,6 @@ class Clothing extends Product {
   }
 }
 
-products = products.map((product) => {
-  if (product.type === 'clothing') {
-    return new Clothing(product);
-  }
-  return new Product(product);
-});
-
 export function findItemInProducts(id) {
   let i = 0;
   for (i; i < products.length; i++) if (products[i].id === id) break;
@@ -715,3 +709,25 @@ export function findItemInProducts(id) {
   }
   return products[i];
 }
+
+export let products = [];
+
+
+export function loadProducts(fun) {
+  const xhr = new XMLHttpRequest();
+  xhr.addEventListener('load', () => {
+    products = JSON.parse(xhr.response);
+
+    products = products.map((product) => {
+      if (product.type === 'clothing') {
+        return new Clothing(product);
+      }
+      return new Product(product);
+    });
+
+    fun();
+  });
+  xhr.open('GET', "https://supersimplebackend.dev/products");
+  xhr.send();
+}
+

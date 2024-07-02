@@ -1,6 +1,8 @@
 const xhr = new XMLHttpRequest();
+
+let response;
 xhr.addEventListener('load', () => {
-  console.log(xhr.response);
+  response = xhr.response;
 });
-xhr.open('GET', "https://supersimplebackend.dev");
+xhr.open('GET', "https://supersimplebackend.dev/products");
 xhr.send();

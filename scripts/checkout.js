@@ -168,4 +168,4 @@ function loadCheckout() {
 }
 
 
-loadCheckout();
+ProductLibrary.loadProducts(loadCheckout);
