@@ -1,4 +1,4 @@
-export const products = [
+export let products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
@@ -659,6 +659,31 @@ export const products = [
   }
 ];
 
+
+//Converting to class
+class Product {
+  id;
+  image;
+  name;
+  rating;
+  priceCents;
+
+  constructor(product) {
+    this.id = product.id;
+    this.image = product.image;
+    this.name = product.name;
+    this.rating = product.rating;
+    this.priceCents = product.priceCents;
+  }
+
+  getImageURL() {
+    return `images/ratings/rating-${(this.rating.stars * 10)}.png`;
+  }
+}
+
+products = products.map((product) => {
+  return new Product(product);
+});
 
 export function findItemInProducts(id) {
   let i = 0;
