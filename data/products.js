@@ -679,9 +679,30 @@ class Product {
   getImageURL() {
     return `images/ratings/rating-${(this.rating.stars * 10)}.png`;
   }
+
+  showExtra() {
+    return "";
+  }
+}
+
+//Clothing Products Onlyyyy
+class Clothing extends Product {
+  sizeChartLink;
+
+  constructor(product) {
+    super(product);
+    this.sizeChartLink = product.sizeChartLink;
+  }
+
+  showExtra() {
+    return `<a href = "images/clothing-size-chart.png" target = _blank> Size Chart</a>`;
+  }
 }
 
 products = products.map((product) => {
+  if (product.type === 'clothing') {
+    return new Clothing(product);
+  }
   return new Product(product);
 });
 
