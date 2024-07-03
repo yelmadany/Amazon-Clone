@@ -173,11 +173,13 @@ ProductLibrary.loadProducts(loadCheckout);
 
 
 // Promise Method
-
-new Promise((resolve) => {
+/*new Promise((resolve) => {
   ProductLibrary.loadProducts(resolve);
 
 }).then(() => {
   loadCheckout();
 });
+*/
 
+//Fetch Method
+ProductLibrary.loadProductsFetch().then(loadCheckout);

@@ -731,3 +731,19 @@ export function loadProducts(fun) {
   xhr.send();
 }
 
+
+export function loadProductsFetch() {
+  const promise = fetch("https://supersimplebackend.dev/products").then((response) => {
+    return response.json();
+  }).then((data) => {
+    console.log(data);
+    products = data.map((product) => {
+      if (product.type === 'clothing') {
+        return new Clothing(product);
+      }
+      return new Product(product);
+    });
+  }
+  );
+  return promise;
+}

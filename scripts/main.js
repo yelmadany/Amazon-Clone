@@ -1,6 +1,6 @@
 //import modules and Step 1 save the data 
 import * as CartLibrary from '../data/cart.js';
-import { products, loadProducts } from '../data/products.js';
+import { products, loadProducts, loadProductsFetch } from '../data/products.js';
 import * as Utils from './utils/money.js';
 
 function HomePage() {
@@ -82,6 +82,10 @@ function HomePage() {
 //loadProducts(HomePage);
 
 //Promise Method
-new Promise((resolve) => {
+/*new Promise((resolve) => {
   loadProducts(resolve);
 }).then(HomePage);
+*/
+
+//fetch Method
+loadProductsFetch().then(() => { HomePage(); });
