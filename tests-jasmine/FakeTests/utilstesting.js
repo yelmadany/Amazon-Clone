@@ -1,6 +1,6 @@
-import * as money from '../scripts/utils/money.js';
+import * as money from '../../scripts/utils/money.js';
 
-import * as date from '../scripts/utils/date.js';
+import * as date from '../../scripts/utils/date.js';
 
 
 
