@@ -167,5 +167,17 @@ function loadCheckout() {
   */
 }
 
-
+/*   //Callback Method
 ProductLibrary.loadProducts(loadCheckout);
+*/
+
+
+// Promise Method
+
+new Promise((resolve) => {
+  ProductLibrary.loadProducts(resolve);
+
+}).then(() => {
+  loadCheckout();
+});
+

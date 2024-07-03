@@ -78,4 +78,10 @@ function HomePage() {
   });
 }
 
-loadProducts(HomePage);
+//CallBack Method
+//loadProducts(HomePage);
+
+//Promise Method
+new Promise((resolve) => {
+  loadProducts(resolve);
+}).then(HomePage);
