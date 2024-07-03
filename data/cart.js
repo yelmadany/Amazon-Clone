@@ -87,3 +87,8 @@ export function setDeliveryOption(cartId, optionId) {
   cartItem.deliveryOption = optionId;
 }
 
+export function deleteCart() {
+  cart = [];
+  cartquantity = 0;
+  save();
+}

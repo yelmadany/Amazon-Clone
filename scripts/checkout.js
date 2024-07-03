@@ -4,8 +4,7 @@ import * as CartLibrary from "../data/cart.js";
 import * as Utils from "./utils/money.js";
 import * as Date from "./utils/date.js";
 import * as DeliveryLibrary from "../data/deliveryOptions.js";
-
-
+import * as OrdersLibrary from "../data/orders.js";
 
 const myCart = CartLibrary.cart;
 const myOptions = DeliveryLibrary.DeliveryOptions;
@@ -126,9 +125,9 @@ async function loadCheckout() {
         <div class="payment-summary-money">${postTaxtPrice}</div>
         </div>
         
-        <button class="place-order-button button-primary">
+        <a href = "orders.html"><button class="place-order-button button-primary js-order-button">
         Place your order
-        </button>
+        </button></a>
         </div>`;
   checkoutPayment.innerHTML = cartHTML;  //Load
   //--------------------------------
@@ -166,7 +165,24 @@ async function loadCheckout() {
     })
   });
   */
+
+
+  //order stuff
+  const orderButton = document.querySelector('.js-order-button');
+  orderButton.addEventListener('click', () => {
+    if (myCart.length > 0) {
+      OrdersLibrary.addToOrders(CartLibrary.cart.map((item) => { return item.productID }), postTaxtPrice); //Add the ids of all the cart Items
+      CartLibrary.deleteCart();
+      loadCheckout();
+    }
+    else {
+      alert("Cart is empty");
+    }
+  });
 }
+loadCheckout();
+
+
 
 /*   //Callback Method
 ProductLibrary.loadProducts(loadCheckout);
@@ -191,4 +207,3 @@ ProductLibrary.loadProducts(loadCheckout);
   loadCheckout();
 }*/
 
-loadCheckout();

@@ -655,13 +655,12 @@
       "hoodies",
       "apparel",
       "mens"
-    ]
-  }
-];*/
-
-import * as Ok from '../scripts/main.js';
-
+      ]
+      }
+      ];*/
 //Converting to class
+export let products = [];
+
 class Product {
   id;
   image;
@@ -680,7 +679,6 @@ class Product {
   getImageURL() {
     return `images/ratings/rating-${(this.rating.stars * 10)}.png`;
   }
-
   showExtra() {
     return "";
   }
@@ -710,7 +708,6 @@ export function findItemInProducts(id) {
   return products[i];
 }
 
-export let products = [];
 
 
 export function loadProducts(fun) {

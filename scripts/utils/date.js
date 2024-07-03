@@ -5,3 +5,8 @@ export function getDeliveryDate(option, returnString = "dddd, MMMM D") {
   date = date.add(option.deliveryDays, 'day');
   return date.format(returnString);
 }
+
+export function getOrderPlacedDate(returnString = "MMMM D") {
+  let date = dayjs();
+  return date.format(returnString);
+}
