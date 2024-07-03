@@ -3,7 +3,8 @@ import * as CartLibrary from '../data/cart.js';
 import { products, loadProducts, loadProductsFetch } from '../data/products.js';
 import * as Utils from './utils/money.js';
 
-function HomePage() {
+async function HomePage() {
+  await loadProductsFetch();
   //Step 2 Generate the HTML
   const productPage = document.querySelector('.products-grid');
   let productsHTML = ""
@@ -77,7 +78,7 @@ function HomePage() {
     });
   });
 }
-
+HomePage();
 //CallBack Method
 //loadProducts(HomePage);
 
@@ -88,4 +89,10 @@ function HomePage() {
 */
 
 //fetch Method
-loadProductsFetch().then(() => { HomePage(); });
+//loadProductsFetch().then(() => { HomePage(); });
+
+//Async Await
+/*async function loadPage() {
+  await loadProductsFetch();
+  HomePage();
+}*/

@@ -14,7 +14,8 @@ const checkoutHeader = document.querySelector('.return-to-home-link');
 const checkoutPayment = document.querySelector('.payment-summary');
 //const checkoutDeliveryOption = document.querySelector('.js-delivery');
 
-function loadCheckout() {
+async function loadCheckout() {
+  await ProductLibrary.loadProductsFetch();
 
   //intitalizing the price information 
   let itemPrices = 0;
@@ -182,4 +183,12 @@ ProductLibrary.loadProducts(loadCheckout);
 */
 
 //Fetch Method
-ProductLibrary.loadProductsFetch().then(loadCheckout);
+//ProductLibrary.loadProductsFetch().then(loadCheckout);
+
+//Async Await
+/*async function loadPage() {
+  await ProductLibrary.loadProductsFetch();
+  loadCheckout();
+}*/
+
+loadCheckout();
